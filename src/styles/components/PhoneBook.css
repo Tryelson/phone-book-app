@@ -1,0 +1,7 @@
+.phone-book-content{
+    background-color: #F6F6F6;
+    width: min(100%, 800px);
+    padding: 20px;
+    border-radius: 20px;
+    margin: 0 auto;
+}

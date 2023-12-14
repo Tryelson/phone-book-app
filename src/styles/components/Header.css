@@ -1,0 +1,13 @@
+.header{
+    display: flex;
+    align-items: center;
+}
+
+.header .app-title{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    font-size: 30px;
+    font-weight: bold;
+}
