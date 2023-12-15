@@ -1,4 +1,5 @@
 import './App.css';
+import 'react-toastify/dist/ReactToastify.min.css';
 import PhoneBook from './components/PhoneBook';
 
 function App() {
