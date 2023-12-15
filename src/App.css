@@ -1,7 +1,40 @@
+:root {
+    --secondary-clr: #A6A6A6;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+}
+
+@keyframes fadeIn {
+    0%{
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    0%{
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
 .App{
     background-color: white;
     width: 100%;
-    height: 100vh;
+    height: 100%;
+    min-height: 100vh;
 
     display: flex;
     align-items: center;
@@ -11,14 +44,102 @@
 .main-content{
     width: 100%;
     max-width: 100%;
+    margin: 40px 0;
 }
 
 .container{
     width: min(100%, 1200px);
     margin: 0 auto;
+}
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.btn{
+    background-color: unset;
+    border: 0;
+    outline: 0;
+    color: black;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 10px 15px;
+    border-radius: 5px;
+
+    opacity: 1;
+    transition: opacity 0.1s ease-in-out;
+    cursor: pointer;
+}
+
+.btn:disabled{
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.btn:disabled:hover{
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.btn.btn-primary{
+    background-color: #347BF6;
+    color: white;
+}
+
+.btn:hover{
+    opacity: 0.8;
+}
+
+.btn:active{
+    opacity: 1;
+}
+
+.btn.btn-danger{
+    background-color: #ff2c35;
+    color: white;
+    padding: 8px 12px;
+}
+
+.btn.btn-secondary{
+    background-color: rgb(175, 175, 175);
+    color: white;
+}
+
+.btn.btn-done{
+    background-color: rgb(44, 221, 139);
+    color: white;
+    padding: 4px 8px;
+}
+
+/* custom scrollbar with accessibilities */
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #5B95FA #DFE9EB;
+}
+  
+*::-webkit-scrollbar {
+    height: 10px;
+    width: 10px;
+}
+*::-webkit-scrollbar-track {
+    border-radius: 9px;
+    background-color: #DFE9EB;
+}
+
+*::-webkit-scrollbar-track:hover {
+    background-color: #DFE9EB;
+}
+
+*::-webkit-scrollbar-track:active {
+    background-color: #B8C0C2;
+}
+
+*::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: #5B95FA;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background-color: #5A93F6;
+}
+
+*::-webkit-scrollbar-thumb:active {
+    background-color: #187BDE;
 }
