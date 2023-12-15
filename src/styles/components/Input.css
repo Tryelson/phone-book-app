@@ -1,0 +1,13 @@
+.input-field{
+    width: 100%;
+    border: 1.5px solid var(--secondary-clr);
+    border-radius: 3px;
+    padding: 6px 5px;
+    outline: unset;
+    transition: all 0.2s ease-in-out;
+}
+
+.input-field:focus{
+    box-shadow: 0 0 0px 2px #3498f6a9;
+    border-color: #3498f6a9;
+}

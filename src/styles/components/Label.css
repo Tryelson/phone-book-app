@@ -1,0 +1,14 @@
+.label-form{
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    
+    font-weight: 600;
+    color: rgb(41, 41, 41);
+    font-size: 14px;
+}
+
+.label-form .text-danger{
+    color: red;
+}
