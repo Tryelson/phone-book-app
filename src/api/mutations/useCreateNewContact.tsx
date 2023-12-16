@@ -21,6 +21,7 @@ const useCreateNewContact = () => {
         } catch (error) {
             if(error instanceof Error){
                 setIsError(error);
+                return error
             }
         } finally {
             setIsLoading(false);

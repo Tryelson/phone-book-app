@@ -44,10 +44,12 @@ export default function AddNewContact({ refetchContacts, openModal }: AddNewCont
         const response = await createNewContact(payload)
 
         if(response?.success){
-            toast.success(response?.message)
+            toast.success('New contact successfully created!')
             refetchContacts()
-        } else {
-            toast.success(response?.message)
+        }
+
+        if(isError || !response){
+            toast.error('Error on create a new contact')
         }
 
         onShowModal()
