@@ -1,0 +1,185 @@
+.phone-book-content{
+    background-color: #F6F6F6;
+    width: calc(100% - 40px);
+    max-width: 800px;
+    padding: 20px;
+    border-radius: 20px;
+    margin: 0 auto;
+    box-shadow: 0 0 10px gray;
+
+    animation: sideEffect 0.5s ease-in-out;
+}
+
+@keyframes sideEffect {
+    0%{
+        transform: translateX(200px);
+    }
+    100%{
+        transform: translateX(0);
+    }
+}
+
+.phone-book-content .box-subtitle{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.phone-book-content .box-subtitle .btn{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.phone-book-content .content-wrapper{
+    width: min(100%, 500px);
+    margin: 0 auto;
+    margin-top: 30px;
+    min-height: 450px;
+}
+
+.phone-book-content .content-wrapper .box-search{
+    background-color: white;
+    border: 1.5px solid var(--secondary-clr);
+    border-radius: 4px;
+
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.phone-book-content .box-search svg{
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.phone-book-content .box-search .input-field{
+    border: 0;
+    border-color: #bdbdbd;
+    width: 100%;
+    outline: unset;
+    padding: 5px 0;
+    padding-left: 25px;
+}
+
+.phone-book-content .contacts-list{
+    display: flex;
+    flex-direction: column;
+    border: 1.5px solid var(--secondary-clr);
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 0 0 5px rgba(128, 128, 128, 0.336);
+
+    margin: 20px 0;
+    padding: 0;
+    overflow: auto;
+    max-height: 320px;
+}
+
+.phone-book-content .contacts-list .contacts-list-item, .phone-book-content .contacts-list-item .form-edit{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+
+    padding: 20px 15px;
+    border-bottom: 1.5px solid var(--secondary-clr);
+    animation: fadeIn 0.5s ease-in-out;
+    height: 90px;
+}
+
+.phone-book-content .contacts-list-item .form-edit{
+    width: 100%;
+    padding: 0;
+}
+
+.phone-book-content .contacts-list-item.editing{
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.phone-book-content .contacts-list-item.editing .input-field{
+    height: 20px;
+}
+
+.phone-book-content .contacts-list-item.editing .wrapper{
+    display: flex;
+    gap: 10px;
+}
+
+.phone-book-content .contacts-list .contacts-list-item:last-of-type{
+    border-bottom: 0;
+}
+
+.contacts-list .user-infos{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.contacts-list .user-infos .user-name{
+    color: black;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    max-height: 20px;
+}
+
+.contacts-list .user-name .btn-edit{
+    padding: 5px 7px;
+    border-radius: 4px;
+    box-shadow: 0 0 3px rgba(128, 128, 128, 0.4);
+    background-color: #ebebeb;
+    border: 0;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.contacts-list .user-name .btn-edit:hover{
+    background-color: #dadada;
+}
+
+.contacts-list .user-infos .user-phone{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--secondary-clr);
+    font-weight: bold;
+}
+
+.empty-list-warning{
+    animation: fadeIn 0.3s ease-in-out;
+    background-color: white;
+    margin-top: 20px;
+    padding: 30px 10px;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 0 5px gray;
+}
+
+.empty-list-warning .message-warning{
+    color: gray;
+}
+
+.empty-list-warning .btn{
+    text-decoration: underline;
+    padding: 0;
+    color: gray;
+}
+
+@media(max-width: 380px){
+    .phone-book-content .box-subtitle{
+        flex-direction: column;
+    }
+
+    .phone-book-content .box-subtitle .btn{
+        width: 100%;
+        justify-content: center;
+    }
+}
