@@ -1,6 +1,6 @@
 import { FaRegTrashAlt } from "react-icons/fa";
 import Modal from "./Modal";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import useDeleteContact from "../api/mutations/useDeleteContact";
 import { toast } from "react-toastify";
@@ -13,7 +13,7 @@ interface RemoveContactProps{
 export default function RemoveContact({ id, refetchContacts }: RemoveContactProps){
 
     const [showModal, setShowModal] = useState(false)
-    const { deleteContact, isLoading, isError } = useDeleteContact()
+    const { deleteContact, isLoading } = useDeleteContact()
 
     function onShowModal(){
         setShowModal(prevState => !prevState)

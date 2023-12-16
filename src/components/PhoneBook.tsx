@@ -1,26 +1,21 @@
 import Header from "./Header";
 import { IoSearchSharp } from "react-icons/io5";
-import { MdLocalPhone } from "react-icons/md";
 
 import '../styles/components/PhoneBook.css'
 import AddNewContact from "./AddNewContact";
-import RemoveContact from "./RemoveContact";
 import useGetAllContacts from "../api/queries/useGetAllContacts";
-import { ChangeEvent, Fragment, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { Contact } from "../interfaces/contacts/contacts";
-import { TfiPencilAlt } from "react-icons/tfi";
-import MaskedInput from "react-text-mask";
 import ContactItem from "./ContactItem";
 
 export default function PhoneBook(){
 
     const [openModal, setOpenModal] = useState<boolean>(false)
     const [isFiltering, setIsFiltering] = useState<boolean>(false)
-    const [isEditing, setIsEditing] = useState<boolean>(false)
 
     const [contactsList, setContactsList] = useState<Contact[]>([])
     const [filteredList, setFilteredList] = useState<Contact[]>([])
-    const { contacts, loading, error, fetchData } = useGetAllContacts()
+    const { fetchData } = useGetAllContacts()
 
     async function handleFetchData(){
         const response = await fetchData()

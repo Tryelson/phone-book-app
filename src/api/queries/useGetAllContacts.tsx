@@ -8,7 +8,7 @@ const useGetAllContacts = () => {
   
     async function fetchData(){
       try {
-        const response = await fetch('http://localhost:3001/contacts');
+        const response = await fetch('https://phone-book-app-api.onrender.com/contacts');
         const data = await response.json();
 
         if(data?.success){
