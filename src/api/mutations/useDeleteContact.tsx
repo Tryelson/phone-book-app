@@ -7,7 +7,7 @@ const useDeleteContact = () => {
     async function deleteContact(id: string){
         setIsLoading(true)
         try {
-            const response = await fetch(`http://localhost:3001/contacts/${id}`, {
+            const response = await fetch(`https://phone-book-app-api.onrender.com/contacts/${id}`, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
