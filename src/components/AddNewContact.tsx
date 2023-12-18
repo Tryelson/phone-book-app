@@ -48,8 +48,8 @@ export default function AddNewContact({ refetchContacts, openModal }: AddNewCont
             refetchContacts()
         }
 
-        if(isError || !response){
-            toast.error('Error on create a new contact')
+        if(isError){
+            toast.error(response.message)
         }
 
         onShowModal()
@@ -93,6 +93,7 @@ export default function AddNewContact({ refetchContacts, openModal }: AddNewCont
                             id="phoneNumber"
                             value={formFields.phoneNumber}
                             onChange={handleFormFields}
+                            required
                         />
                     </div>
 

@@ -1,0 +1,13 @@
+.contacts-list .user-infos.loading{
+    width: 100%;
+}
+
+.contacts-list .user-infos.loading .user-name span{
+    width: 100%;
+    max-width: 100px;
+}
+
+.contacts-list .user-infos.loading .user-phone span{
+    width: 100%;
+    max-width: 100px;
+}

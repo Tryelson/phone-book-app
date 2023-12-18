@@ -1,35 +1,32 @@
-import { useEffect, useState } from "react";
-import { Contact } from "../../interfaces/contacts/contacts";
+import { useState } from "react";
+import { FetchDataResponse } from "../../interfaces/contacts/contacts";
 
 const useGetAllContacts = () => {
-    const [contacts, setContacts] = useState<Contact[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<Error | null>(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const [isError, setIsError] = useState<Error | null>(null);
   
-    async function fetchData(){
+    async function fetchData(): Promise<FetchDataResponse>{
       try {
         const response = await fetch('https://phone-book-app-api.onrender.com/contacts');
         const data = await response.json();
 
         if(data?.success){
-          setContacts(data.contacts);
           return data
         }
 
       } catch (error) {
         if(error instanceof Error){
-            setError(error);
+          setIsError(error);
+          return { success: false, contacts: [] }
         }
       } finally {
-        setLoading(false);
+        setIsLoading(false);
       }
-    };
 
-    useEffect(() => {
-      fetchData();
-    }, []);
+      return { success: false, contacts: [] }
+    };
   
-    return { contacts, loading, error, fetchData };
+    return { isLoading, isError, fetchData };
   };
   
   export default useGetAllContacts;

@@ -1,36 +1,48 @@
+import '../styles/components/PhoneBook.css'
 import Header from "./Header";
 import { IoSearchSharp } from "react-icons/io5";
 
-import '../styles/components/PhoneBook.css'
 import AddNewContact from "./AddNewContact";
 import useGetAllContacts from "../api/queries/useGetAllContacts";
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Contact } from "../interfaces/contacts/contacts";
 import ContactItem from "./ContactItem";
+import LoadingContactItem from './LoadingContactItem';
+import SearchField from './SearchField';
+
 
 export default function PhoneBook(){
 
     const [openModal, setOpenModal] = useState<boolean>(false)
     const [isFiltering, setIsFiltering] = useState<boolean>(false)
-
-    const [contactsList, setContactsList] = useState<Contact[]>([])
-    const [filteredList, setFilteredList] = useState<Contact[]>([])
-    const { fetchData } = useGetAllContacts()
+    
+    const { fetchData, isLoading, isError } = useGetAllContacts()
+    const [contactsList, setContactsList] = useState<Contact[] | []>([])
+    const [filteredList, setFilteredList] = useState<Contact[] | []>([])
 
     async function handleFetchData(){
         const response = await fetchData()
 
         if(response?.success){
-            setContactsList(response.contacts)
-            setFilteredList(response.contacts)
+            let formattedContacts = response.contacts.map(contact => {
+                if(contact.lastName){
+                    return {...contact, fullName: `${contact.firstName} ${contact.lastName}`}
+                } else {
+                    return {...contact, fullName: contact.firstName}
+                }
+            })
+
+            setContactsList(formattedContacts)
+            setFilteredList(formattedContacts)
         }
     }
 
-    function handleFilterContacts(event: ChangeEvent<HTMLInputElement>){
+    function handleFilterContacts(search: string){
         setIsFiltering(true)
-        if(event.target.value){
-            const localContacts = contactsList.filter(contact => contact.firstName.toUpperCase().includes(event.target.value.toUpperCase()) || contact.lastName?.toUpperCase().includes(event.target.value.toUpperCase()))
-    
+
+        if(search){
+            const localContacts = contactsList.filter(contact => contact.fullName.toUpperCase().includes(search.toUpperCase()) || contact.phoneNumber?.toUpperCase().includes(search.toUpperCase()))
+
             setContactsList(localContacts)
         } else {
             setContactsList(filteredList)
@@ -38,13 +50,13 @@ export default function PhoneBook(){
         }
     }
 
-    useEffect(() => {
-        handleFetchData()
+    useMemo(() => {
+        handleFetchData();
     }, [])
 
     useEffect(() => {
-        setOpenModal(false)
-    }, [openModal])
+        setOpenModal(false);
+    }, [openModal]);
 
     return (
         <div className="phone-book-content">
@@ -59,29 +71,47 @@ export default function PhoneBook(){
 
                     <div className="box-search">
                         <IoSearchSharp color="#7c7c7c" />
-                        <input type="text" className="input-field" placeholder="Search for contact by last name..." onChange={(event) => handleFilterContacts(event)} />
+                        <SearchField handleFilterContacts={handleFilterContacts} />
                     </div>
 
-                    {contactsList.length > 0 && (
-                        <ul className="contacts-list">
-                            {contactsList.map((contact, index) => {
-                                return (
-                                    <ContactItem key={contact.id} contact={contact} handleFetchData={handleFetchData} />
-                                )
-                            })}
-                        </ul>
-                    )}
-
-                    {!contactsList.length && isFiltering && (
-                        <div className="empty-list-warning">
-                            <p className="message-warning">Any results found!</p>
-                        </div>
-                    )}
-
-                    {!contactsList.length && !isFiltering && (
-                        <div className="empty-list-warning">
-                            <p className="message-warning">Your contacts list is empty, <button className="btn" type="button" onClick={() => setOpenModal(true)}>click here</button> to add a new one!</p>
-                        </div>
+                    {!isError ? (
+                        <>
+                            {contactsList.length > 0 && (
+                                <ul className="contacts-list">
+                                    {contactsList.map((contact, index) => {
+                                        return (
+                                            <ContactItem key={contact.id} contact={contact} handleFetchData={handleFetchData} />
+                                        )
+                                    })}
+                                </ul>
+                            )}
+        
+                            {!contactsList.length && isLoading && (
+                                <ul className="contacts-list">
+                                    <LoadingContactItem />
+                                    <LoadingContactItem />
+                                    <LoadingContactItem />
+                                    <LoadingContactItem />
+                                    <LoadingContactItem />
+                                    <LoadingContactItem />
+                                    <LoadingContactItem />
+                                </ul>
+                            )}
+        
+                            {!contactsList.length && isFiltering && (
+                                <div className="empty-list-warning">
+                                    <p className="message-warning">Any results found!</p>
+                                </div>
+                            )}
+                        </>
+                    ) : (
+                        <>
+                            {!contactsList.length && !isFiltering && !isLoading && (
+                                <div className="empty-list-warning">
+                                    <p className="message-warning">Your contacts list is empty, <button className="btn" type="button" onClick={() => setOpenModal(true)}>click here</button> to add a new one!</p>
+                                </div>
+                            )}
+                        </>
                     )}
                 </div>
             </div>
