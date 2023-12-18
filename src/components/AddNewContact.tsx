@@ -46,9 +46,7 @@ export default function AddNewContact({ refetchContacts, openModal }: AddNewCont
         if(response?.success){
             toast.success('New contact successfully created!')
             refetchContacts()
-        }
-
-        if(isError){
+        } else {
             toast.error(response.message)
         }
 
