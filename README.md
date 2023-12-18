@@ -27,6 +27,6 @@ You will also see any lint errors in the console.
 
 ### No .env need to run access any variables or api url
 
-If you want to access all app functionalities, you need to setup step by step and clone the backend repository in your local desktop.
+No need to clone the backend to access all the functionalities, everything should works fine. The backend application is running on a server cloud so no need to clone the repository.
 
 That's it, enjoy the app! :=)

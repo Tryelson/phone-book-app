@@ -79,7 +79,7 @@
     margin: 20px 0;
     padding: 0;
     overflow: auto;
-    max-height: 320px;
+    max-height: 520px;
 }
 
 .phone-book-content .contacts-list .contacts-list-item, .phone-book-content .contacts-list-item .form-edit{
